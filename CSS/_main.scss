@@ -1,0 +1,567 @@
+@use 'mixin' as m;
+
+.mainvisual {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    height: calc(100vh - 80px);
+
+    #bg-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &-catchcopy {
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        transform: translateY(-50%);
+        width: fit-content;
+
+        /* ★ここがポイント！ */
+        /* コンテンツが画面端にぶつからないよう、max-widthでガードを作る */
+        max-width: calc(100% - 32px);
+        padding-inline: 16px; // 文字自体の左右に安全圏を確保
+
+        color: #fff;
+        z-index: 2;
+        text-align: left;
+
+        @include m.sp {
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; // スマホでは少し広めに
+            padding-inline: 0; // 親のwidth指定があるからspでは0でもOK
+        }
+
+        h2 {
+            font-size: 4rem;
+            font-family: "Shippori Mincho", serif;
+            font-weight: bold;
+            line-height: 1.6;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+
+            @include m.sp {
+                font-size: 2.5rem;
+                line-height: 1.4;
+                text-align: left;
+                white-space: normal;
+            }
+        }
+    }
+}
+
+.about {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 160px;
+    padding-block: 80px;
+    background-color: #222;
+    background-image: url('../img/top-about-img.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+
+    @include m.tab {
+        padding-block: 32px;
+        margin-bottom: 80px;
+    }
+
+    @include m.sp {
+        width: 100%;
+        max-width: none;
+        height: auto;
+        padding-block: 32px;
+        margin-bottom: 80px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .white-btn {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+
+        @include m.tab {
+            position: static;
+            transform: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 24px;
+            margin-inline: auto;
+            width: 130px;
+            min-width: 130px;
+            height: 44px;
+
+            a,
+            span {
+                font-size: 14px;
+                white-space: nowrap;
+            }
+        }
+
+        @include m.sp {
+            position: static;
+            transform: none;
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 130px;
+            min-width: 130px;
+            height: 44px;
+            margin-inline: auto;
+
+            a,
+            span {
+                font-size: 14px;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    &-text {
+        max-width: 600px;
+
+        @include m.sp {
+            max-width: 361px;
+            margin-inline: auto;
+        }
+    }
+}
+
+.best-trip {
+    padding-inline: 16px;
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        min-height: 150px;
+        margin-bottom: 32px;
+        padding-inline: 0px !important;
+
+        @include m.tab {
+            flex-direction: column;
+            min-height: auto;
+            padding-block: 32px;
+            margin-bottom: 0;
+        }
+
+        @include m.sp {
+            padding-block: 32px;
+        }
+    }
+
+    &-text {
+        width: 100%;
+        max-width: 700px;
+        text-align: center;
+        margin-inline: auto;
+
+        @include m.tab {
+            max-width: 600px;
+            margin-bottom: 24px;
+        }
+
+        @include m.sp {
+            max-width: 361px;
+        }
+    }
+
+    .black-btn {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+
+        @include m.tab {
+            position: static;
+            transform: none;
+            margin-inline: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 130px;
+            min-width: 130px;
+            height: 44px;
+        }
+
+        @include m.sp {
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+    }
+}
+
+.slick-area {
+    font-size: 0;
+    margin-bottom: 160px;
+    width: 100%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+    position: relative; // ← 絶対配置の基準をここで固定します
+
+    @include m.sp {
+        margin-bottom: 80px;
+        padding: 0 16px;
+    }
+
+    img {
+        width: 300px;
+        box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.25);
+        object-fit: cover;
+
+        @include m.sp {
+            width: 280px;
+            height: 187px;
+        }
+    }
+
+    // .slick-dots がネストで効かない場合に備え、上位のセレクタとしても記述しておくか、Slickの階層に合わせます
+    .slick-dots,
+    &.slick-area .slick-dots {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 24px 0 0;
+
+        // ▼ 追加：絶対配置の基準を揃え、幅のはみ出しを防止します
+        position: absolute;
+        bottom: -40px; // 必要に応じて調整
+        left: 0;
+        width: 100%;
+
+        li {
+            width: 6px;
+            height: 6px;
+            margin: 0 6px;
+            padding: 0;
+
+            button {
+                display: block;
+                width: 6px;
+                height: 6px;
+                padding: 0;
+                background: #ccc;
+                border-radius: 50%;
+                border: none;
+                font-size: 0;
+                line-height: 0;
+                cursor: pointer;
+                position: relative;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 6px;
+                    height: 6px;
+                }
+            }
+
+            &.slick-active button {
+                background: #333;
+                transform: scale(1.2);
+            }
+        }
+    }
+}
+
+.slick-slide {
+    margin: 0 24px;
+    outline: none;
+}
+
+.slick-list {
+    margin: 0 -24px;
+}
+
+.gourmet {
+    background-color: #2A290F;
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding-block: 32px;
+    padding-inline: 16px; // 統一
+    margin-block: 160px;
+
+    @include m.tab {
+        margin-block: 120px;
+        padding-inline: 16px;
+    }
+
+    @include m.sp {
+        max-width: 480px;
+        margin-block: 90px 80px;
+        padding-inline: 16px;
+    }
+
+    &-inner {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+
+        @include m.tab {
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+    }
+
+    img {
+        width: 300px;
+        height: 240px;
+        object-fit: cover;
+        flex-shrink: 0;
+
+        @include m.tab {
+            width: 300px;
+            height: 240px;
+        }
+
+        @include m.sp {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+        }
+    }
+
+    &-text {
+        flex: 1;
+        height: 240px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+
+        @include m.tab {
+            height: auto;
+            width: 100%;
+            max-width: 600px;
+            gap: 24px;
+        }
+
+        .white-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            line-height: 1;
+            padding-inline: 24px;
+            margin-inline: auto;
+
+            @include m.tab {
+                margin-top: 8px;
+            }
+
+            @include m.sp {
+                margin-top: 16px;
+                width: 130px;
+            }
+        }
+    }
+
+    & .section-title,
+    & .introduction {
+        margin-bottom: 0;
+    }
+}
+
+.blog {
+    margin-bottom: 160px;
+
+    @include m.tab {
+        margin-bottom: 120px;
+    }
+
+    @include m.sp {
+        margin-bottom: 80px;
+    }
+
+    .wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: 150px;
+
+        @include m.tab {
+            flex-direction: column;
+            min-height: auto;
+            padding-block: 48px;
+        }
+
+        @include m.sp {
+            padding-block: 32px;
+        }
+
+        .black-btn {
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            transform: translateY(-50%);
+
+            @include m.tab {
+                position: static;
+                transform: none;
+                margin: 24px auto 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 130px;
+                min-width: 130px;
+                height: 44px;
+            }
+
+            @include m.sp {
+                margin-top: 24px;
+                margin-bottom: 32px;
+            }
+        }
+    }
+
+    &-text {
+        width: 100%;
+        max-width: 480px;
+        text-align: center;
+        margin-inline: auto;
+        margin-bottom: 32px;
+
+        @include m.tab {
+            margin-bottom: 24px;
+        }
+    }
+}
+
+.blog-list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    gap: 20px;
+    padding-inline: 16px; // リスト自体の左右ガード
+
+    @include m.tab {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    &-item p {
+        text-align: center;
+
+        @include m.tab {
+            font-size: 1rem;
+        }
+
+        @include m.sp {
+            font-size: 0.875rem;
+        }
+    }
+
+    img {
+        width: 300px;
+        height: 240px;
+        box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.25);
+        object-fit: cover;
+        margin-bottom: 16px;
+        display: block;
+        margin-inline: auto;
+
+        @include m.sp {
+            width: 300px;
+            height: 200px;
+            margin-bottom: 12px;
+        }
+    }
+}
+
+.contact {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 160px;
+    padding-block: 80px;
+    background-color: #222;
+    background-image: url('../img/top-contact-img-1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+
+    @include m.tab {
+        padding-block: 60px;
+        margin-bottom: 120px;
+    }
+
+    @include m.sp {
+        padding-block: 32px;
+        margin-bottom: 80px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .white-btn {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+
+        @include m.tab {
+            position: static;
+            transform: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 32px auto 0;
+            width: 130px;
+            min-width: 130px;
+            height: 44px;
+        }
+
+        @include m.sp {
+            margin-top: 24px;
+
+            a,
+            span {
+                font-size: 14px;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    &-text {
+        max-width: 500px;
+        width: 100%;
+
+        @include m.tab {
+            max-width: 90%;
+            margin-inline: auto;
+        }
+    }
+}

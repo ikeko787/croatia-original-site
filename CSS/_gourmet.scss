@@ -1,0 +1,176 @@
+@use 'mixin' as m;
+
+.gourmet-lower {
+    width: 100%;
+    margin-bottom: 120px;
+
+    @include m.sp {
+        margin-bottom: 80px;
+    }
+
+    &-title {
+        width: 100%;
+        max-width: 550px;
+        display: block;
+        margin-inline: auto;
+        font-size: 1rem;
+        font-weight: normal;
+        text-align: center;
+        margin-bottom: 120px;
+
+        @include m.sp {
+            font-size: 0.875rem;
+            margin-bottom: 80px;
+        }
+    }
+
+    &-inner {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 80px 96px;
+
+        @include m.sp {
+            grid-template-columns: 1fr;
+            gap: 64px;
+        }
+    }
+
+    &-list {
+        @include m.sp {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .gourmet-post {
+        @include m.sp {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    &-image {
+        margin-bottom: 24px;
+
+        @include m.sp {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.25);
+
+            @include m.sp {
+                width: 300px;
+                height: 240px;
+                object-fit: cover;
+                margin-inline: auto;
+            }
+        }
+    }
+
+    &-text {
+        width: 100%;
+        text-align: center;
+
+        @include m.sp {
+            max-width: 300px;
+            margin-inline: auto;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: normal;
+            margin-bottom: 16px;
+
+            @include m.sp {
+                font-size: 0.875rem;
+                margin-bottom: 14px;
+            }
+        }
+
+        p {
+            @include m.sp {
+                font-size: 0.875rem;
+            }
+        }
+    }
+}
+
+.pagenation {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+
+    li {
+        padding-inline: 20px;
+    }
+}
+
+//gourmet-post
+
+.post {
+    padding-block: 80px;
+
+    &-wrapper {
+        width: 100%;
+        max-width: 1440px;
+        margin-inline: auto;
+
+        @include m.sp {
+            padding-inline: 16px;
+        }
+    }
+
+    &-page-title {
+        font-size: 1.25rem;
+        font-weight: normal;
+        margin-bottom: 32px;
+
+        /* ★ここを追加：下のアイテムと幅を合わせて中央に寄せる */
+        max-width: 900px;
+        margin-inline: auto;
+        width: 100%;
+        /* 幅を確保する */
+    }
+
+    &-item {
+        max-width: 900px;
+        margin-inline: auto;
+        /* ★これだけで、アイテム全体が中央に寄ります */
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 40px;
+        margin-bottom: 64px;
+
+        @include m.sp {
+            flex-direction: column;
+        }
+
+        &-img {
+            flex: 1;
+            /* ★「余ったスペースを1の割合で持つ」 */
+        }
+
+        &-text {
+            flex: 1;
+
+            p {
+                text-align: justify;
+            }
+        }
+    }
+
+    .black-btn {
+        display: block;
+        margin-inline: auto;
+    }
+}

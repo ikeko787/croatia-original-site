@@ -1,0 +1,151 @@
+.white-btn {
+    position: relative;
+    display: flex; // 中の文字を中央に寄せるため
+    align-items: center; // 上下中央
+    justify-content: center; // 左右中央
+
+    /* サイズ指定 */
+    width: 130px;
+    height: 50px;
+
+    background-color: #fff;
+    color: #000; // 初期状態の文字色（黒）
+    font-weight: 900;
+    font-size: 14px; // 50pxの高さに合わせて調整
+    border: 2px solid #000;
+    border-radius: 99rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 1;
+
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+        /* 親要素の.white-btnで指定したcolorを引き継ぐ */
+        white-space: nowrap;
+        /* ★文字が絶対に改行されないように固定 */
+        /* ★余計な余白をリセット */
+        padding: 0;
+        margin: 0;
+
+        span {
+            display: inline-block;
+            width: auto;
+        }
+    }
+
+    /* ホバーで出てくる黒い背景 */
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        transform: scaleX(0); // 最初は横幅ゼロ
+        transition: transform 0.3s ease;
+        z-index: -1; // 文字の裏側に配置
+    }
+
+    &:hover {
+        color: #fff; // ホバー時に文字を白くする
+
+        &::before {
+            transform: scaleX(1); // 背景を全開に
+        }
+    }
+}
+
+.black-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* サイズ指定 */
+    width: 130px;
+    height: 50px;
+
+    background-color: #000; // 1. 最初は「黒」
+    color: #fff; // 2. 文字は「白」
+    font-weight: 900;
+    font-size: 14px;
+    border: 2px solid #000; // 3. 枠線は「黒」のまま（白背景に溶け込まないように）
+    border-radius: 99rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 1;
+
+    a {
+        display: flex;
+        /* 中の要素（戻る）を真ん中に寄せる */
+        align-items: center;
+        /* 上下中央 */
+        justify-content: center;
+        /* 左右中央 */
+        width: 100%;
+        /* ボタンの横幅いっぱいに広げる */
+        height: 100%;
+        /* ボタンの高さ一杯に広げる */
+        text-decoration: none;
+        /* 下線を消す */
+        color: #fff;
+    }
+
+    /* ホバーで出てくる白い背景 */
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff; // 4. 迫ってくる背景を「白」にする
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        z-index: -1;
+    }
+
+    &:hover {
+        color: #000; // 5. ホバー時に文字を「黒」に！
+
+        a {
+            color: #000;
+        }
+
+        &::before {
+            transform: scaleX(1);
+        }
+    }
+}
+
+.to-top {
+    width: 50px;
+    height: 50px;
+    background-color: #121212;
+    border: solid 1px #fff;
+    border-radius: 50%;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+
+    /* 文字を真ん中に持ってくる設定 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    /* 文字の色 */
+    text-decoration: none;
+    /* 下線を消す */
+    font-size: 12px;
+    /* 文字の大きさ（お好みで） */
+    font-weight: bold;
+}

@@ -1,0 +1,206 @@
+@use 'mixin' as m;
+
+.story {
+
+    @include m.sp {
+        text-align: center;
+    }
+
+    &-section {
+        margin-bottom: 64px;
+
+        @include m.mq(900px) {
+            text-align: center;
+        }
+
+        &-title {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        &-en {
+            font-weight: normal;
+            color: #000;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 16px;
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 50px;
+                height: 1px;
+                background-color: #000;
+
+                @include m.mq(900px) {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+    }
+
+    &-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 96px;
+        margin-bottom: 120px;
+
+        @include m.mq(900px) {
+            flex-direction: column;
+            align-items: center;
+            gap: 80px;
+        }
+
+        @include m.sp {
+            gap: 64px;
+            margin-bottom: 80px;
+        }
+
+        &-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            @include m.mq(900px) {
+                max-width: 400px;
+                margin-inline: auto;
+            }
+
+            @include m.sp {
+                max-width: 100%;
+            }
+        }
+
+        &-image {
+            width: 100%;
+            margin-bottom: 24px;
+
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.25);
+
+                @include m.sp {
+                    width: 300px;
+                    margin-inline: auto;
+                }
+            }
+        }
+
+        &-text {
+            text-align: center;
+
+            @include m.sp {
+                max-width: 300px;
+                margin-inline: auto;
+            }
+
+            h3 {
+                font-size: 1rem;
+                font-weight: normal;
+                margin-bottom: 16px;
+
+                @include m.sp {
+                    font-size: 0.875rem;
+                }
+            }
+
+            p {
+                font-weight: normal;
+                color: #000;
+
+                @include m.sp {
+                    font-size: 0.875rem;
+                }
+            }
+        }
+    }
+
+
+
+    &-history {
+        margin-inline: calc(50% - 50vw);
+        width: 100vw;
+        margin-bottom: 120px;
+        background-color: #0F172A;
+        display: flex;
+        justify-content: center;
+        padding-block: 32px;
+
+        @include m.tab {
+            padding-inline: 16px;
+        }
+
+        &-inner {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 16px;
+            padding-inline: 16px;
+
+            @include m.mq(900px) {
+                flex-direction: column;
+                align-items: center;
+                padding-inline: 0;
+            }
+        }
+
+        img {
+            width: 385px;
+            height: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+
+            @include m.mq(900px) {
+                width: 300px;
+            }
+        }
+
+        &-content {
+            color: #fff;
+            padding-top: 24px;
+
+            @include m.mq(900px) {
+                padding-top: 0;
+                max-width: 300px;
+                text-align: center;
+            }
+
+            .story-section-title {
+                color: #fff;
+            }
+
+            .story-history-introduction {
+                font-size: 16px;
+                line-height: 1.8;
+                letter-spacing: -0.05em;
+            }
+
+            .story-section-en {
+                color: #fff;
+                display: inline-block;
+                margin-bottom: 32px;
+
+                &::after {
+                    background-color: #fff;
+
+                    @include m.mq(900px) {
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                }
+            }
+        }
+    }
+}

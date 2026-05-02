@@ -1,0 +1,164 @@
+@use 'mixin' as m;
+
+.header {
+    // --- 共通・PCレイアウト ---
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1024px;
+    height: 80px;
+    margin: 0 auto;
+    padding: 0 5%;
+    background-color: #fff;
+
+    // ロゴ
+    h1 {
+        line-height: 0;
+
+        a {
+            display: block;
+        }
+
+        img {
+            width: 170px;
+
+            @include m.tab {
+                width: 130px;
+            }
+        }
+    }
+
+    // ナビゲーション
+    &-nav {
+        display: block; // PCは常時表示
+
+        @include m.tab {
+            position: fixed;
+            top: 0;
+            left: -100%; // 画面外（300px固定より100%の方が確実）
+            width: 300px;
+            height: 100vh;
+            background: #fff;
+            padding: 25px;
+            opacity: 0;
+            overflow-y: auto;
+            transition: all 0.5s ease;
+            z-index: 100;
+        }
+
+        &-list {
+            display: flex;
+
+            @include m.tab {
+                display: block;
+            }
+
+            li {
+                margin-left: 40px;
+
+                @include m.tab {
+                    margin: 0;
+                    border-bottom: 1px solid #ddd;
+                }
+
+                a {
+                    display: block;
+                    text-decoration: none;
+                    color: #333;
+                    font-weight: bold;
+                    transition: color 0.3s ease;
+
+                    &:hover {
+                        color: #ff9d00;
+                    }
+
+                    @include m.tab {
+                        padding: 24px 0;
+                    }
+                }
+            }
+        }
+    }
+
+    // ハンバーガーボタン（三本線）
+    .hamburger {
+        display: none; // PC非表示
+
+        @include m.tab {
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 18px;
+            transform: translateY(-50%); // 中央配置を確実に
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 110;
+
+            span {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: #121212;
+                border-radius: 4px;
+                transition: all 0.5s ease;
+
+                &:nth-child(1) {
+                    top: 4px;
+                }
+
+                &:nth-child(2) {
+                    top: 14px;
+                }
+
+                &:nth-child(3) {
+                    bottom: 4px;
+                }
+            }
+        }
+    }
+
+    // マスク（背景）
+    .mask {
+        display: none;
+
+        @include m.tab {
+            position: fixed;
+            inset: 0; // top, right, bottom, leftを1発で指定
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 90;
+            cursor: pointer;
+        }
+    }
+
+    /* --- スマホでメニューが開いた時 (.header.open) --- */
+    &.open {
+        .header-nav {
+            left: 0;
+            opacity: 1;
+        }
+
+        .mask {
+            display: block;
+        }
+
+        .hamburger span {
+
+            background-color: #fff;
+
+            &:nth-child(1) {
+                transform: translateY(10px) rotate(-45deg);
+            }
+
+            &:nth-child(2) {
+                opacity: 0;
+            }
+
+            &:nth-child(3) {
+                transform: translateY(-10px) rotate(45deg);
+            }
+        }
+    }
+}
